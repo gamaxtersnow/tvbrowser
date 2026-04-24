@@ -57,3 +57,41 @@ agent-browser close
 - 查看网页截图确认视觉适配效果
 
 首次使用需安装：`npm i -g agent-browser && agent-browser install`
+
+### ios-simulator-skill（Xcode 编译与模拟器测试）
+
+项目已配置 [ios-simulator-skill](https://github.com/conorluddy/ios-simulator-skill) 用于 Xcode 编译和 tvOS 模拟器自动化测试。技能位于 `.claude/skills/ios-simulator-skill/`。
+
+**前提：需要先创建 Xcode 项目（.xcodeproj）**
+
+常用命令：
+
+```bash
+# 编译项目（需先 cd 到 .xcodeproj 所在目录）
+python .claude/skills/ios-simulator-skill/ios-simulator-skill/scripts/build_and_test.py \
+  --project tvBrowser.xcodeproj --scheme tvBrowser
+
+# 启动 Apple TV 模拟器
+python .claude/skills/ios-simulator-skill/ios-simulator-skill/scripts/simctl_boot.py \
+  --name "Apple TV" --wait-ready
+
+# 查看模拟器当前屏幕的可交互元素
+python .claude/skills/ios-simulator-skill/ios-simulator-skill/scripts/screen_mapper.py
+
+# 在模拟器中点击元素（通过 accessibility label）
+python .claude/skills/ios-simulator-skill/ios-simulator-skill/scripts/navigator.py \
+  --find-text "优酷" --tap
+
+# 截图
+python .claude/skills/ios-simulator-skill/ios-simulator-skill/scripts/app_state_capture.py \
+  --app-bundle-id com.yourname.tvBrowser --output screenshot.png
+
+# 查看 App 日志
+python .claude/skills/ios-simulator-skill/ios-simulator-skill/scripts/log_monitor.py \
+  --app com.yourname.tvBrowser --follow
+```
+
+首次使用需检查环境：
+```bash
+bash .claude/skills/ios-simulator-skill/ios-simulator-skill/scripts/sim_health_check.sh
+```

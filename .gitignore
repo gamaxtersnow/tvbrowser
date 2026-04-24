@@ -1,0 +1,22 @@
+# macOS
+.DS_Store
+
+# Xcode
+*.xcodeproj/xcuserdata/
+*.xcodeproj/project.xcworkspace/xcuserdata/
+*.xcworkspace/xcuserdata/
+DerivedData/
+build/
+
+# Swift Package Manager
+.build/
+
+# Claude
+.claude/
+
+# Docs
+docs/
+
+# IDE
+.idea/
+.vscode/
