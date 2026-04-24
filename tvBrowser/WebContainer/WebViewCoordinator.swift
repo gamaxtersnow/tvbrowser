@@ -6,13 +6,16 @@ final class WebViewCoordinator: NSObject, WKNavigationDelegate, WKScriptMessageH
 
     private let onLoadingStateChange: ((Bool) -> Void)?
     private let onTitleChange: ((String) -> Void)?
+    private let onError: ((Error) -> Void)?
 
     init(
         onLoadingStateChange: ((Bool) -> Void)? = nil,
-        onTitleChange: ((String) -> Void)? = nil
+        onTitleChange: ((String) -> Void)? = nil,
+        onError: ((Error) -> Void)? = nil
     ) {
         self.onLoadingStateChange = onLoadingStateChange
         self.onTitleChange = onTitleChange
+        self.onError = onError
     }
 
     // MARK: - WKNavigationDelegate
@@ -30,16 +33,29 @@ final class WebViewCoordinator: NSObject, WKNavigationDelegate, WKScriptMessageH
 
     func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
         onLoadingStateChange?(false)
+        onError?(error)
     }
 
     func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: Error) {
         onLoadingStateChange?(false)
+        onError?(error)
     }
 
     func webViewWebContentProcessDidTerminate(_ webView: WKWebView) {
         if let url = webView.url {
             webView.load(URLRequest(url: url))
         }
+    }
+
+    func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
+        if let url = navigationAction.request.url {
+            let scheme = url.scheme?.lowercased() ?? ""
+            if scheme != "http" && scheme != "https" && scheme != "about" {
+                decisionHandler(.cancel)
+                return
+            }
+        }
+        decisionHandler(.allow)
     }
 
     // MARK: - WKScriptMessageHandler
@@ -55,12 +71,31 @@ final class WebViewCoordinator: NSObject, WKNavigationDelegate, WKScriptMessageH
 
         switch type {
         case "videoPlaying":
-            break
+            enterVideoFullscreen()
         case "videoEnded":
             break
         default:
             break
         }
+    }
+
+    private func enterVideoFullscreen() {
+        evaluateJavaScript("""
+            (function() {
+                var videos = document.querySelectorAll('video');
+                for (var i = 0; i < videos.length; i++) {
+                    var v = videos[i];
+                    if (!v.paused) {
+                        if (v.webkitEnterFullscreen) {
+                            v.webkitEnterFullscreen();
+                        } else if (v.requestFullscreen) {
+                            v.requestFullscreen();
+                        }
+                        break;
+                    }
+                }
+            })();
+        """)
     }
 
     // MARK: - Public Helpers

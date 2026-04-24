@@ -11,6 +11,7 @@ struct TVWebView: UIViewRepresentable {
     @ObservedObject var controller: WebViewController
     let onLoadingStateChange: ((Bool) -> Void)?
     let onTitleChange: ((String) -> Void)?
+    let onError: ((Error) -> Void)?
 
     func makeUIView(context: Context) -> WKWebView {
         let config = WKWebViewConfiguration()
@@ -44,7 +45,8 @@ struct TVWebView: UIViewRepresentable {
     func makeCoordinator() -> WebViewCoordinator {
         let coordinator = WebViewCoordinator(
             onLoadingStateChange: onLoadingStateChange,
-            onTitleChange: onTitleChange
+            onTitleChange: onTitleChange,
+            onError: onError
         )
         coordinator.controller = controller
         return coordinator
