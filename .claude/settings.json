@@ -1,0 +1,18 @@
+{
+  "enabledPlugins": {
+    "document-skills@anthropic-agent-skills": true,
+    "frontend-design@claude-plugins-official": true
+  },
+  "permissions": {
+    "Bash": [
+      {
+        "command": "agent-browser *",
+        "description": "Browser automation CLI for web research and DOM inspection"
+      },
+      {
+        "command": "npx agent-browser *",
+        "description": "Browser automation via npx"
+      }
+    ]
+  }
+}
