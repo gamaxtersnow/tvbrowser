@@ -2,6 +2,7 @@ import WebKit
 
 final class WebViewCoordinator: NSObject, WKNavigationDelegate, WKScriptMessageHandler {
     weak var webView: WKWebView?
+    weak var controller: WebViewController?
 
     private let onLoadingStateChange: ((Bool) -> Void)?
     private let onTitleChange: ((String) -> Void)?
@@ -36,7 +37,6 @@ final class WebViewCoordinator: NSObject, WKNavigationDelegate, WKScriptMessageH
     }
 
     func webViewWebContentProcessDidTerminate(_ webView: WKWebView) {
-        // 进程被系统回收后自动重载
         if let url = webView.url {
             webView.load(URLRequest(url: url))
         }
@@ -55,10 +55,8 @@ final class WebViewCoordinator: NSObject, WKNavigationDelegate, WKScriptMessageH
 
         switch type {
         case "videoPlaying":
-            // TODO: Unit 7 处理全屏
             break
         case "videoEnded":
-            // TODO: Unit 7 处理退出全屏
             break
         default:
             break

@@ -8,6 +8,7 @@ final class SharedProcessPool {
 struct TVWebView: UIViewRepresentable {
     let url: URL
     let platform: Platform
+    @ObservedObject var controller: WebViewController
     let onLoadingStateChange: ((Bool) -> Void)?
     let onTitleChange: ((String) -> Void)?
 
@@ -28,9 +29,6 @@ struct TVWebView: UIViewRepresentable {
         let webView = WKWebView(frame: .zero, configuration: config)
         webView.navigationDelegate = context.coordinator
         webView.allowsBackForwardNavigationGestures = false
-        #if os(iOS)
-        webView.scrollView.isScrollEnabled = true
-        #endif
 
         context.coordinator.webView = webView
         return webView
@@ -44,9 +42,11 @@ struct TVWebView: UIViewRepresentable {
     }
 
     func makeCoordinator() -> WebViewCoordinator {
-        WebViewCoordinator(
+        let coordinator = WebViewCoordinator(
             onLoadingStateChange: onLoadingStateChange,
             onTitleChange: onTitleChange
         )
+        coordinator.controller = controller
+        return coordinator
     }
 }

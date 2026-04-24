@@ -2,6 +2,7 @@ import SwiftUI
 
 struct BrowserView: View {
     let platform: Platform
+    @StateObject private var controller = WebViewController()
     @State private var isLoading = true
     @State private var pageTitle = ""
     @Environment(\.dismiss) private var dismiss
@@ -11,6 +12,7 @@ struct BrowserView: View {
             TVWebView(
                 url: platform.url,
                 platform: platform,
+                controller: controller,
                 onLoadingStateChange: { loading in
                     isLoading = loading
                 },
@@ -33,10 +35,25 @@ struct BrowserView: View {
             }
         }
         .onMoveCommand { direction in
-            // TODO: Unit 4 实现遥控器映射
+            let jsDirection: String
+            switch direction {
+            case .up: jsDirection = "up"
+            case .down: jsDirection = "down"
+            case .left: jsDirection = "left"
+            case .right: jsDirection = "right"
+            @unknown default: jsDirection = "down"
+            }
+            controller.evaluateJavaScript("tvOSFocus.move('\(jsDirection)')")
+        }
+        .onPlayPauseCommand {
+            controller.evaluateJavaScript("tvOSFocus.select()")
         }
         .onExitCommand {
-            dismiss()
+            if controller.canGoBack() {
+                controller.goBack()
+            } else {
+                dismiss()
+            }
         }
         .overlay(alignment: .top) {
             if !pageTitle.isEmpty {
