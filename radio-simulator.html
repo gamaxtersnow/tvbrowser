@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ESP32 Punk Radio Simulator</title>
+  <style>
+    * { box-sizing: border-box; }
+    :root {
+      --bench: #171513;
+      --panel: #24211d;
+      --panel-2: #302b25;
+      --edge: #6f6250;
+      --copper: #c06f35;
+      --wire-red: #d64a38;
+      --wire-blue: #4f9bd8;
+      --wire-yellow: #d6b84a;
+      --oled: #8fffe4;
+      --oled-dim: rgba(143, 255, 228, 0.45);
+      --text: #efe4cf;
+      --muted: #aa9d86;
+      --black: #0a0d0c;
+    }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background:
+        linear-gradient(90deg, rgba(255,255,255,0.035) 1px, transparent 1px),
+        linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+        radial-gradient(circle at 18% 20%, rgba(192,111,53,0.12), transparent 34%),
+        var(--bench);
+      background-size: 38px 38px, 38px 38px, auto, auto;
+      color: var(--text);
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    }
+    main {
+      width: min(1180px, calc(100vw - 28px));
+      margin: 0 auto;
+      padding: 28px 0;
+      display: grid;
+      grid-template-columns: minmax(320px, 1fr) 360px;
+      gap: 24px;
+      align-items: start;
+    }
+    .radio {
+      position: relative;
+      min-height: 680px;
+      border: 2px solid #4a4033;
+      background:
+        linear-gradient(135deg, rgba(255,255,255,0.06), transparent 22%),
+        linear-gradient(180deg, var(--panel), #1d1a17);
+      box-shadow: 0 22px 60px rgba(0,0,0,0.42), inset 0 0 0 1px rgba(255,255,255,0.04);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    .radio::before, .radio::after {
+      content: "";
+      position: absolute;
+      left: 24px;
+      right: 24px;
+      height: 10px;
+      background: repeating-linear-gradient(90deg, #453b31 0 18px, #1b1815 18px 26px);
+      opacity: 0.55;
+    }
+    .radio::before { top: 18px; }
+    .radio::after { bottom: 18px; }
+    .badge {
+      position: absolute;
+      top: 46px;
+      left: 36px;
+      color: #19120c;
+      background: var(--wire-yellow);
+      padding: 8px 12px;
+      transform: rotate(-2deg);
+      border: 1px solid rgba(0,0,0,0.35);
+      font-weight: 900;
+      letter-spacing: 0.08em;
+    }
+    .board {
+      position: absolute;
+      top: 108px;
+      left: 34px;
+      width: 288px;
+      height: 178px;
+      border-radius: 6px;
+      background: linear-gradient(135deg, #1f6b55, #123d33);
+      border: 2px solid #0b2a23;
+      box-shadow: inset 0 0 0 2px rgba(255,255,255,0.05), 0 14px 28px rgba(0,0,0,0.28);
+    }
+    .chip {
+      position: absolute;
+      left: 82px;
+      top: 44px;
+      width: 126px;
+      height: 72px;
+      border-radius: 3px;
+      background: #171b1b;
+      border: 1px solid #3a4541;
+      display: grid;
+      place-items: center;
+      color: #d8e8df;
+      font-weight: 800;
+      font-size: 16px;
+    }
+    .antenna {
+      position: absolute;
+      right: 14px;
+      top: 18px;
+      width: 42px;
+      height: 124px;
+      border: 2px dashed rgba(232, 204, 120, 0.8);
+      border-radius: 4px;
+    }
+    .pin-row {
+      position: absolute;
+      left: 18px;
+      right: 18px;
+      bottom: 14px;
+      display: flex;
+      justify-content: space-between;
+    }
+    .pin-row span {
+      width: 7px;
+      height: 18px;
+      background: #caa96b;
+      border-radius: 2px;
+    }
+    .oled {
+      position: absolute;
+      top: 126px;
+      right: 56px;
+      width: 318px;
+      height: 178px;
+      padding: 18px;
+      background: #050807;
+      border: 10px solid #111;
+      border-radius: 6px;
+      box-shadow: 0 0 34px rgba(143,255,228,0.16), inset 0 0 28px rgba(143,255,228,0.08);
+    }
+    .screen {
+      height: 100%;
+      color: var(--oled);
+      text-shadow: 0 0 10px rgba(143,255,228,0.65);
+      display: grid;
+      grid-template-rows: auto auto 1fr auto;
+      gap: 9px;
+      font-size: 16px;
+    }
+    .screen h1 {
+      margin: 0;
+      font-size: 24px;
+      letter-spacing: 0.08em;
+    }
+    .screen .row {
+      display: flex;
+      justify-content: space-between;
+      color: var(--oled-dim);
+    }
+    .station {
+      align-self: center;
+      font-size: 20px;
+      line-height: 1.3;
+      min-height: 54px;
+    }
+    .status {
+      border-top: 1px solid rgba(143,255,228,0.25);
+      padding-top: 8px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .speaker {
+      position: absolute;
+      bottom: 92px;
+      width: 210px;
+      height: 210px;
+      border-radius: 50%;
+      background: radial-gradient(circle, #161412 0 30%, #2c2823 31% 42%, #0d0c0b 43% 100%);
+      border: 6px solid #3b342b;
+      box-shadow: inset 0 0 0 18px rgba(0,0,0,0.28);
+    }
+    .speaker.left { left: 70px; }
+    .speaker.right { right: 70px; }
+    .speaker::after {
+      content: "";
+      position: absolute;
+      inset: 24px;
+      border-radius: 50%;
+      background: repeating-radial-gradient(circle, transparent 0 9px, rgba(239,228,207,0.12) 10px 12px);
+    }
+    .knob {
+      position: absolute;
+      left: calc(50% - 70px);
+      bottom: 126px;
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 35% 30%, #81715d, #2e2821 62%, #15120f);
+      border: 4px solid #8f7a5c;
+      box-shadow: 0 12px 28px rgba(0,0,0,0.48);
+      transform: rotate(var(--knob-angle, 0deg));
+      transition: transform 160ms ease;
+    }
+    .knob::before {
+      content: "";
+      position: absolute;
+      left: 66px;
+      top: 12px;
+      width: 8px;
+      height: 34px;
+      background: var(--wire-yellow);
+      border-radius: 99px;
+    }
+    .wire {
+      position: absolute;
+      height: 5px;
+      border-radius: 99px;
+      opacity: 0.9;
+      transform-origin: left center;
+    }
+    .w1 { left: 315px; top: 154px; width: 170px; background: var(--wire-red); transform: rotate(8deg); }
+    .w2 { left: 315px; top: 198px; width: 170px; background: var(--wire-blue); transform: rotate(-6deg); }
+    .w3 { left: 300px; top: 270px; width: 300px; background: var(--wire-yellow); transform: rotate(30deg); }
+    .led {
+      position: absolute;
+      left: 356px;
+      top: 124px;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: #27f17a;
+      box-shadow: 0 0 18px #27f17a;
+    }
+    .side {
+      display: grid;
+      gap: 14px;
+    }
+    .panel {
+      border: 1px solid rgba(239,228,207,0.12);
+      border-radius: 8px;
+      background: rgba(36,33,29,0.88);
+      padding: 16px;
+      box-shadow: 0 14px 32px rgba(0,0,0,0.28);
+    }
+    .panel h2 {
+      margin: 0 0 12px;
+      font-size: 16px;
+      color: var(--wire-yellow);
+      letter-spacing: 0.08em;
+    }
+    .controls {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+    button {
+      min-height: 44px;
+      border: 1px solid rgba(239,228,207,0.2);
+      border-radius: 6px;
+      background: #161411;
+      color: var(--text);
+      font: inherit;
+      cursor: pointer;
+      transition: transform 120ms ease, border-color 120ms ease, background 120ms ease;
+    }
+    button:hover {
+      transform: translateY(-1px);
+      border-color: var(--copper);
+      background: #201b16;
+    }
+    button:focus-visible {
+      outline: 2px solid var(--oled);
+      outline-offset: 2px;
+    }
+    .primary {
+      grid-column: span 2;
+      background: var(--copper);
+      color: #120d09;
+      font-weight: 900;
+    }
+    .meta {
+      display: grid;
+      gap: 8px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+    .meta strong { color: var(--text); }
+    .logs {
+      height: 220px;
+      overflow: auto;
+      margin: 0;
+      padding: 12px;
+      background: var(--black);
+      color: var(--oled);
+      border-radius: 6px;
+      border: 1px solid rgba(143,255,228,0.22);
+      font-size: 13px;
+      line-height: 1.55;
+    }
+    .hint {
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.5;
+      margin-top: 10px;
+    }
+    @media (max-width: 920px) {
+      main { grid-template-columns: 1fr; }
+      .radio { min-height: 620px; }
+      .oled { left: 36px; right: 36px; top: 310px; width: auto; }
+      .speaker { bottom: 56px; width: 150px; height: 150px; }
+      .speaker.left { left: 34px; }
+      .speaker.right { right: 34px; }
+      .knob { bottom: 60px; width: 110px; height: 110px; left: calc(50% - 55px); }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <section class="radio" aria-label="ESP32 网络收音机仿真器">
+      <div class="badge">ESP32 WROVER · WIFI · A2DP</div>
+      <div class="board">
+        <div class="chip">ESP32</div>
+        <div class="antenna"></div>
+        <div class="pin-row" aria-hidden="true">
+          <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+        </div>
+      </div>
+      <div class="wire w1"></div>
+      <div class="wire w2"></div>
+      <div class="wire w3"></div>
+      <div class="led"></div>
+      <div class="oled">
+        <div class="screen">
+          <h1>PUNK RADIO</h1>
+          <div class="row"><span id="modeText">MODE:NET</span><span id="volumeText">VOL:8</span></div>
+          <div class="station" id="stationText">1/6 中国之声<br><small>新闻进行时</small></div>
+          <div class="status" id="statusText">List ready</div>
+        </div>
+      </div>
+      <div class="speaker left"></div>
+      <div class="speaker right"></div>
+      <div class="knob" id="knob"></div>
+    </section>
+
+    <aside class="side">
+      <section class="panel">
+        <h2>旋钮控制</h2>
+        <div class="controls">
+          <button id="rotateLeft">逆时针</button>
+          <button id="rotateRight">顺时针</button>
+          <button id="shortPress" class="primary">短按旋钮</button>
+          <button id="longPress" class="primary">长按切模式</button>
+        </div>
+        <p class="hint">键盘也能玩：左右方向键转旋钮，空格短按，Enter 长按。</p>
+      </section>
+
+      <section class="panel">
+        <h2>当前状态</h2>
+        <div class="meta">
+          <div>模式：<strong id="modeMeta">网络电台</strong></div>
+          <div>网络：<strong id="wifiMeta">WiFi connected</strong></div>
+          <div>播放：<strong id="playMeta">待机</strong></div>
+          <div>蓝牙：<strong id="btMeta">未启动</strong></div>
+          <div>直播源：<strong id="streamMeta">playUrlMulti · HLS/AAC</strong></div>
+        </div>
+      </section>
+
+      <section class="panel">
+        <h2>串口日志</h2>
+        <pre class="logs" id="logs"></pre>
+      </section>
+    </aside>
+  </main>
+
+  <script type="module">
+    import {
+      createState,
+      currentStation,
+      longPress,
+      rotate,
+      shortPress,
+      stations,
+    } from "./simulator/radio-simulator-core.mjs";
+
+    let state = createState();
+    let knobSteps = 0;
+
+    const els = {
+      knob: document.querySelector("#knob"),
+      modeText: document.querySelector("#modeText"),
+      volumeText: document.querySelector("#volumeText"),
+      stationText: document.querySelector("#stationText"),
+      statusText: document.querySelector("#statusText"),
+      modeMeta: document.querySelector("#modeMeta"),
+      wifiMeta: document.querySelector("#wifiMeta"),
+      playMeta: document.querySelector("#playMeta"),
+      btMeta: document.querySelector("#btMeta"),
+      streamMeta: document.querySelector("#streamMeta"),
+      logs: document.querySelector("#logs"),
+    };
+
+    function render() {
+      const station = currentStation(state);
+      els.modeText.textContent = `MODE:${state.mode}`;
+      els.volumeText.textContent = `VOL:${state.volume}`;
+      els.statusText.textContent = state.status;
+      els.modeMeta.textContent = state.mode === "NET" ? "网络电台" : "蓝牙音箱";
+      els.wifiMeta.textContent = state.wifi === "connected" ? "WiFi connected" : "WiFi failed";
+      els.playMeta.textContent = state.playing ? station.title : "待机";
+      els.btMeta.textContent = state.mode === "BT" ? (state.btConnected ? "手机已连接" : "等待配对 PunkRadio-BT") : "未启动";
+      els.streamMeta.textContent = state.mode === "NET" ? station.stream : "A2DP SBC -> I2S";
+      if (state.mode === "BT") {
+        els.stationText.innerHTML = `Pair PunkRadio-BT<br><small>${state.btConnected ? "phone connected" : "waiting phone"}</small>`;
+      } else {
+        els.stationText.innerHTML = `${state.selectedStation + 1}/${stations.length} ${station.title}<br><small>${station.subtitle}</small>`;
+      }
+      els.logs.textContent = state.log.join("\n");
+      els.logs.scrollTop = els.logs.scrollHeight;
+      els.knob.style.setProperty("--knob-angle", `${knobSteps * 18}deg`);
+    }
+
+    function turn(delta) {
+      knobSteps += delta;
+      state = rotate(state, delta);
+      render();
+    }
+
+    document.querySelector("#rotateLeft").addEventListener("click", () => turn(-1));
+    document.querySelector("#rotateRight").addEventListener("click", () => turn(1));
+    document.querySelector("#shortPress").addEventListener("click", () => {
+      state = shortPress(state);
+      render();
+    });
+    document.querySelector("#longPress").addEventListener("click", () => {
+      state = longPress(state);
+      render();
+    });
+    window.addEventListener("keydown", (event) => {
+      if (event.key === "ArrowLeft") turn(-1);
+      if (event.key === "ArrowRight") turn(1);
+      if (event.key === " ") {
+        event.preventDefault();
+        state = shortPress(state);
+        render();
+      }
+      if (event.key === "Enter") {
+        state = longPress(state);
+        render();
+      }
+    });
+
+    render();
+  </script>
+</body>
+</html>

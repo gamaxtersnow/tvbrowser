@@ -1,0 +1,1202 @@
+{
+  "version": "2.8",
+  "children": [
+    {
+      "type": "frame",
+      "id": "gFUDL",
+      "x": 0,
+      "y": 0,
+      "name": "ESP32 网络收音机接线图",
+      "width": 1920,
+      "height": 1080,
+      "fill": "#0E0D10",
+      "layout": "none",
+      "children": [
+        {
+          "type": "text",
+          "id": "XUApa",
+          "x": 96,
+          "y": 64,
+          "name": "title",
+          "fill": "#F5F0E8",
+          "content": "ESP32 穷鬼朋克网络收音机 + 蓝牙音响",
+          "fontFamily": "Inter",
+          "fontSize": 64,
+          "fontWeight": "700"
+        },
+        {
+          "type": "text",
+          "id": "rsM3g",
+          "x": 100,
+          "y": 138,
+          "name": "sub",
+          "fill": "#BDB7AA",
+          "content": "OLED + 旋钮 + 双 MAX98357A 立体声接线图",
+          "fontFamily": "Inter",
+          "fontSize": 30,
+          "fontWeight": "normal"
+        },
+        {
+          "type": "frame",
+          "id": "fDt2l",
+          "x": 650,
+          "y": 305,
+          "name": "ESP32-WROVER DevKit",
+          "width": 560,
+          "height": 395,
+          "fill": "#172033",
+          "cornerRadius": 22,
+          "stroke": {
+            "thickness": 3,
+            "fill": "#00E5FF"
+          },
+          "layout": "none",
+          "children": [
+            {
+              "type": "text",
+              "id": "tCOPi",
+              "x": 38,
+              "y": 34,
+              "name": "espTitle",
+              "fill": "#E8FBFF",
+              "content": "ESP32-WROVER",
+              "fontFamily": "Inter",
+              "fontSize": 42,
+              "fontWeight": "700"
+            },
+            {
+              "type": "text",
+              "id": "VcntC",
+              "x": 40,
+              "y": 88,
+              "name": "espDesc",
+              "fill": "#9DECF7",
+              "content": "内置 2.4GHz Wi‑Fi + Classic BT / 网络电台核心",
+              "fontFamily": "Inter",
+              "fontSize": 20,
+              "fontWeight": "normal"
+            },
+            {
+              "type": "text",
+              "id": "KVgdx",
+              "x": 36,
+              "y": 150,
+              "name": "espLeft",
+              "fill": "#F6D365",
+              "content": "OLED / 旋钮\nGPIO21  OLED SDA\nGPIO22  OLED SCL\nGPIO32  编码器 A\nGPIO33  编码器 B\nGPIO13  编码器 SW",
+              "lineHeight": 1.25,
+              "fontFamily": "Inter",
+              "fontSize": 24,
+              "fontWeight": "normal"
+            },
+            {
+              "type": "text",
+              "id": "ZrZVd",
+              "x": 310,
+              "y": 150,
+              "name": "espRight",
+              "fill": "#86EFAC",
+              "content": "I2S 音频\nGPIO27  BCLK\nGPIO26  LRC / WS\nGPIO25  DIN\n\n电源\n3V3 / 5V / GND",
+              "lineHeight": 1.25,
+              "fontFamily": "Inter",
+              "fontSize": 24,
+              "fontWeight": "normal"
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "7rAA9",
+          "x": 110,
+          "y": 250,
+          "name": "SSD1306 OLED",
+          "width": 390,
+          "height": 180,
+          "fill": "#151515",
+          "cornerRadius": 16,
+          "stroke": {
+            "thickness": 3,
+            "fill": "#7DD3FC"
+          },
+          "layout": "none",
+          "children": [
+            {
+              "type": "frame",
+              "id": "xITaX",
+              "x": 26,
+              "y": 28,
+              "name": "oledScreen",
+              "width": 338,
+              "height": 96,
+              "fill": "#001827",
+              "cornerRadius": 8,
+              "stroke": {
+                "thickness": 2,
+                "fill": "#00E5FF"
+              },
+              "layout": "none",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "t9aQl",
+                  "x": 24,
+                  "y": 24,
+                  "name": "oledText",
+                  "fill": "#00E5FF",
+                  "content": "PUNK RADIO\nBT: READY  VOL: 42",
+                  "lineHeight": 1.2,
+                  "fontFamily": "Inter",
+                  "fontSize": 24,
+                  "fontWeight": "normal"
+                }
+              ]
+            },
+            {
+              "type": "text",
+              "id": "6MBCh",
+              "x": 28,
+              "y": 138,
+              "name": "oledPins",
+              "fill": "#D9F99D",
+              "content": "VCC=3V3  GND  SDA=21  SCL=22",
+              "fontFamily": "Inter",
+              "fontSize": 21,
+              "fontWeight": "normal"
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "NvrtV",
+          "x": 160,
+          "y": 615,
+          "name": "EC11 Encoder",
+          "width": 285,
+          "height": 285,
+          "fill": "#1C1917",
+          "cornerRadius": 24,
+          "stroke": {
+            "thickness": 3,
+            "fill": "#F97316"
+          },
+          "layout": "none",
+          "children": [
+            {
+              "type": "ellipse",
+              "id": "vdsHq",
+              "x": 58,
+              "y": 54,
+              "name": "knob",
+              "fill": "#2B2B2B",
+              "width": 170,
+              "height": 170,
+              "stroke": {
+                "thickness": 8,
+                "fill": "#D6D3D1"
+              }
+            },
+            {
+              "type": "text",
+              "id": "3udxH",
+              "x": 40,
+              "y": 16,
+              "name": "encPins",
+              "fill": "#FDE68A",
+              "content": "A=32  B=33\nSW=13  COM=GND",
+              "lineHeight": 1.1,
+              "fontFamily": "Inter",
+              "fontSize": 17,
+              "fontWeight": "normal"
+            },
+            {
+              "type": "text",
+              "id": "TeRgf",
+              "x": 34,
+              "y": 226,
+              "name": "encLabel",
+              "fill": "#FED7AA",
+              "content": "短按切模式\n旋转音量 / 长按换台",
+              "lineHeight": 1.1,
+              "fontFamily": "Inter",
+              "fontSize": 18,
+              "fontWeight": "normal"
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "eQCUx",
+          "x": 1330,
+          "y": 250,
+          "name": "MAX98357A Left",
+          "width": 360,
+          "height": 175,
+          "fill": "#111827",
+          "cornerRadius": 18,
+          "stroke": {
+            "thickness": 3,
+            "fill": "#22C55E"
+          },
+          "layout": "none",
+          "children": [
+            {
+              "type": "text",
+              "id": "z31WM",
+              "x": 28,
+              "y": 24,
+              "name": "ampLT",
+              "fill": "#DCFCE7",
+              "content": "MAX98357A  左声道",
+              "fontFamily": "Inter",
+              "fontSize": 30,
+              "fontWeight": "700"
+            },
+            {
+              "type": "text",
+              "id": "ilA5u",
+              "x": 28,
+              "y": 75,
+              "name": "ampLP",
+              "fill": "#BBF7D0",
+              "content": "BCLK/LRC/DIN 共用 I2S\nVIN=5V   GND\nL 焊盘 / SD 高电平",
+              "lineHeight": 1.25,
+              "fontFamily": "Inter",
+              "fontSize": 21,
+              "fontWeight": "normal"
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "fFNMs",
+          "x": 1330,
+          "y": 575,
+          "name": "MAX98357A Right",
+          "width": 360,
+          "height": 175,
+          "fill": "#111827",
+          "cornerRadius": 18,
+          "stroke": {
+            "thickness": 3,
+            "fill": "#A78BFA"
+          },
+          "layout": "none",
+          "children": [
+            {
+              "type": "text",
+              "id": "7ZGT7",
+              "x": 28,
+              "y": 24,
+              "name": "ampRT",
+              "fill": "#EDE9FE",
+              "content": "MAX98357A  右声道",
+              "fontFamily": "Inter",
+              "fontSize": 30,
+              "fontWeight": "700"
+            },
+            {
+              "type": "text",
+              "id": "9FC2z",
+              "x": 28,
+              "y": 75,
+              "name": "ampRP",
+              "fill": "#DDD6FE",
+              "content": "BCLK/LRC/DIN 共用 I2S\nVIN=5V   GND\nR 焊盘 / SD 中电平",
+              "lineHeight": 1.25,
+              "fontFamily": "Inter",
+              "fontSize": 21,
+              "fontWeight": "normal"
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "CntyR",
+          "x": 620,
+          "y": 790,
+          "name": "5V Power",
+          "width": 640,
+          "height": 130,
+          "fill": "#241611",
+          "cornerRadius": 20,
+          "stroke": {
+            "thickness": 3,
+            "fill": "#EF4444"
+          },
+          "layout": "none",
+          "children": [
+            {
+              "type": "text",
+              "id": "GkaJI",
+              "x": 32,
+              "y": 22,
+              "name": "powerT",
+              "fill": "#FEE2E2",
+              "content": "5V 2A USB / 充电宝供电",
+              "fontFamily": "Inter",
+              "fontSize": 30,
+              "fontWeight": "700"
+            },
+            {
+              "type": "text",
+              "id": "nPJVg",
+              "x": 32,
+              "y": 70,
+              "name": "powerP",
+              "fill": "#FECACA",
+              "content": "5V → 两块功放 VIN；ESP32 可走 USB。所有 GND 必须共地。",
+              "fontFamily": "Inter",
+              "fontSize": 20,
+              "fontWeight": "normal"
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "EvGBi",
+          "x": 1750,
+          "y": 260,
+          "name": "Left Speaker",
+          "width": 120,
+          "height": 162,
+          "fill": "#191919",
+          "cornerRadius": 18,
+          "stroke": {
+            "thickness": 3,
+            "fill": "#22C55E"
+          },
+          "layout": "none",
+          "children": [
+            {
+              "type": "ellipse",
+              "id": "YHhYL",
+              "x": 20,
+              "y": 24,
+              "name": "spkLCone",
+              "fill": "#2A2A2A",
+              "width": 80,
+              "height": 80,
+              "stroke": {
+                "thickness": 6,
+                "fill": "#A3E635"
+              }
+            },
+            {
+              "type": "text",
+              "id": "WSYJn",
+              "x": 20,
+              "y": 112,
+              "name": "spkLText",
+              "fill": "#DCFCE7",
+              "content": "左喇叭\n4Ω 3W",
+              "lineHeight": 1.1,
+              "fontFamily": "Inter",
+              "fontSize": 18,
+              "fontWeight": "normal"
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "BkqLX",
+          "x": 1750,
+          "y": 585,
+          "name": "Right Speaker",
+          "width": 120,
+          "height": 162,
+          "fill": "#191919",
+          "cornerRadius": 18,
+          "stroke": {
+            "thickness": 3,
+            "fill": "#A78BFA"
+          },
+          "layout": "none",
+          "children": [
+            {
+              "type": "ellipse",
+              "id": "EIAq8",
+              "x": 20,
+              "y": 24,
+              "name": "spkRCone",
+              "fill": "#2A2A2A",
+              "width": 80,
+              "height": 80,
+              "stroke": {
+                "thickness": 6,
+                "fill": "#C4B5FD"
+              }
+            },
+            {
+              "type": "text",
+              "id": "4ZhdC",
+              "x": 20,
+              "y": 112,
+              "name": "spkRText",
+              "fill": "#EDE9FE",
+              "content": "右喇叭\n4Ω 3W",
+              "lineHeight": 1.1,
+              "fontFamily": "Inter",
+              "fontSize": 18,
+              "fontWeight": "normal"
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "ailpv",
+          "x": 96,
+          "y": 452,
+          "name": "WiFi Note",
+          "width": 610,
+          "height": 64,
+          "fill": "#0F1F1A",
+          "cornerRadius": 14,
+          "stroke": {
+            "thickness": 3,
+            "fill": "#34D399"
+          },
+          "gap": 14,
+          "padding": [
+            10,
+            18
+          ],
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "icon_font",
+              "id": "iy7CI",
+              "name": "wifiIcon",
+              "width": 36,
+              "height": 36,
+              "iconFontName": "wifi",
+              "iconFontFamily": "lucide",
+              "fill": "#6EE7B7"
+            },
+            {
+              "type": "text",
+              "id": "WzpU9",
+              "name": "wifiText",
+              "fill": "#D1FAE5",
+              "textGrowth": "fixed-width",
+              "width": 510,
+              "content": "ESP32-WROVER 自带 Wi‑Fi：不用外挂模块；铁盒给天线开窗",
+              "lineHeight": 1.1,
+              "fontFamily": "Inter",
+              "fontSize": 21,
+              "fontWeight": "700"
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "l72ei",
+          "x": 980,
+          "y": 705,
+          "name": "Antenna Note",
+          "width": 430,
+          "height": 70,
+          "fill": "#231B11",
+          "cornerRadius": 12,
+          "stroke": {
+            "thickness": 3,
+            "fill": "#FDE047"
+          },
+          "gap": 12,
+          "padding": [
+            10,
+            18
+          ],
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "icon_font",
+              "id": "cVbAv",
+              "name": "antIcon",
+              "width": 36,
+              "height": 36,
+              "iconFontName": "radio-tower",
+              "iconFontFamily": "lucide",
+              "fill": "#FDE047"
+            },
+            {
+              "type": "text",
+              "id": "Ulyr5",
+              "name": "antText",
+              "fill": "#FDE68A",
+              "textGrowth": "fixed-width",
+              "width": 330,
+              "content": "铁盒开天线窗口；或买 U.FL 外置天线版",
+              "lineHeight": 1.1,
+              "fontFamily": "Inter",
+              "fontSize": 21,
+              "fontWeight": "700"
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "id": "aNrFQ",
+          "x": 96,
+          "y": 540,
+          "name": "warning",
+          "fill": "#FB7185",
+          "content": "别买 ESP32-C3/S3 做蓝牙音箱：A2DP 需要 Classic Bluetooth",
+          "fontFamily": "Inter",
+          "fontSize": 28,
+          "fontWeight": "700"
+        },
+        {
+          "type": "text",
+          "id": "szVe8",
+          "x": 120,
+          "y": 218,
+          "name": "oledLabel",
+          "fill": "#67E8F9",
+          "content": "OLED：3V3 / GND / SDA21 / SCL22",
+          "fontFamily": "Inter",
+          "fontSize": 21,
+          "fontWeight": "700"
+        },
+        {
+          "type": "text",
+          "id": "c2fvl",
+          "x": 1215,
+          "y": 455,
+          "name": "i2sLabel",
+          "fill": "#86EFAC",
+          "content": "I2S: 27 BCLK / 26 LRC / 25 DIN",
+          "fontFamily": "Inter",
+          "fontSize": 22,
+          "fontWeight": "700"
+        },
+        {
+          "type": "text",
+          "id": "ocGPe",
+          "x": 1498,
+          "y": 760,
+          "name": "spkLabel",
+          "fill": "#FDE68A",
+          "content": "SPK+/SPK- 是桥接输出：不要接 GND",
+          "fontFamily": "Inter",
+          "fontSize": 22,
+          "fontWeight": "700"
+        },
+        {
+          "type": "frame",
+          "id": "cPHU7",
+          "x": 105,
+          "y": 950,
+          "name": "Wire Legend",
+          "width": 1710,
+          "height": 72,
+          "fill": "#161412",
+          "cornerRadius": 16,
+          "stroke": {
+            "thickness": 2,
+            "fill": "#57534E"
+          },
+          "gap": 28,
+          "padding": [
+            14,
+            28
+          ],
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "text",
+              "id": "mHwVv",
+              "name": "leg1",
+              "fill": "#FCA5A5",
+              "content": "红=5V",
+              "fontFamily": "Inter",
+              "fontSize": 23,
+              "fontWeight": "normal"
+            },
+            {
+              "type": "text",
+              "id": "kykEQ",
+              "name": "leg2",
+              "fill": "#D6D3D1",
+              "content": "灰=GND",
+              "fontFamily": "Inter",
+              "fontSize": 23,
+              "fontWeight": "normal"
+            },
+            {
+              "type": "text",
+              "id": "KdfKG",
+              "name": "leg3",
+              "fill": "#67E8F9",
+              "content": "青=OLED I2C",
+              "fontFamily": "Inter",
+              "fontSize": 23,
+              "fontWeight": "normal"
+            },
+            {
+              "type": "text",
+              "id": "qMdhH",
+              "name": "leg4",
+              "fill": "#86EFAC",
+              "content": "绿=I2S",
+              "fontFamily": "Inter",
+              "fontSize": 23,
+              "fontWeight": "normal"
+            },
+            {
+              "type": "text",
+              "id": "y4eWU",
+              "name": "leg5",
+              "fill": "#FDBA74",
+              "content": "橙=旋钮信号",
+              "fontFamily": "Inter",
+              "fontSize": 23,
+              "fontWeight": "normal"
+            },
+            {
+              "type": "text",
+              "id": "CFvbn",
+              "name": "leg6",
+              "fill": "#FDE68A",
+              "content": "喇叭输出不要接地、不要共地",
+              "fontFamily": "Inter",
+              "fontSize": 23,
+              "fontWeight": "normal"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "nO50Q",
+      "x": 2040,
+      "y": 0,
+      "name": "采购清单和焊接顺序",
+      "width": 1920,
+      "height": 1080,
+      "fill": "#0E0D10",
+      "layout": "none",
+      "children": [
+        {
+          "type": "text",
+          "id": "qna6g",
+          "x": 88,
+          "y": 60,
+          "name": "title",
+          "fill": "#F5F0E8",
+          "content": "采购清单 + 焊接顺序",
+          "fontFamily": "Inter",
+          "fontSize": 66,
+          "fontWeight": "700"
+        },
+        {
+          "type": "text",
+          "id": "6y8Gk",
+          "x": 92,
+          "y": 136,
+          "name": "sub",
+          "fill": "#BDB7AA",
+          "content": "ESP32 自带 Wi‑Fi；重点是天线位置、供电稳定和分阶段验收",
+          "fontFamily": "Inter",
+          "fontSize": 30,
+          "fontWeight": "normal"
+        },
+        {
+          "type": "frame",
+          "id": "ezDYC",
+          "x": 970,
+          "y": 145,
+          "name": "Test Flow",
+          "width": 540,
+          "height": 58,
+          "fill": "#111827",
+          "cornerRadius": 12,
+          "stroke": {
+            "thickness": 2,
+            "fill": "#57534E"
+          },
+          "gap": 12,
+          "padding": 8,
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "text",
+              "id": "OJmUI",
+              "name": "f1",
+              "fill": "#67E8F9",
+              "content": "屏",
+              "fontFamily": "Inter",
+              "fontSize": 28,
+              "fontWeight": "700"
+            },
+            {
+              "type": "text",
+              "id": "b7au1",
+              "name": "a1",
+              "fill": "#D6D3D1",
+              "content": "→",
+              "fontFamily": "Inter",
+              "fontSize": 28,
+              "fontWeight": "normal"
+            },
+            {
+              "type": "text",
+              "id": "iQqmW",
+              "name": "f2",
+              "fill": "#FDBA74",
+              "content": "旋钮",
+              "fontFamily": "Inter",
+              "fontSize": 28,
+              "fontWeight": "700"
+            },
+            {
+              "type": "text",
+              "id": "MWANX",
+              "name": "a2",
+              "fill": "#D6D3D1",
+              "content": "→",
+              "fontFamily": "Inter",
+              "fontSize": 28,
+              "fontWeight": "normal"
+            },
+            {
+              "type": "text",
+              "id": "cvz4Y",
+              "name": "f3",
+              "fill": "#BBF7D0",
+              "content": "单声道",
+              "fontFamily": "Inter",
+              "fontSize": 28,
+              "fontWeight": "700"
+            },
+            {
+              "type": "text",
+              "id": "gc8tb",
+              "name": "a3",
+              "fill": "#D6D3D1",
+              "content": "→",
+              "fontFamily": "Inter",
+              "fontSize": 28,
+              "fontWeight": "normal"
+            },
+            {
+              "type": "text",
+              "id": "Yvjnf",
+              "name": "f4",
+              "fill": "#DDD6FE",
+              "content": "立体声",
+              "fontFamily": "Inter",
+              "fontSize": 28,
+              "fontWeight": "700"
+            },
+            {
+              "type": "text",
+              "id": "vsYMT",
+              "name": "a4",
+              "fill": "#D6D3D1",
+              "content": "→",
+              "fontFamily": "Inter",
+              "fontSize": 28,
+              "fontWeight": "normal"
+            },
+            {
+              "type": "text",
+              "id": "g8NEk",
+              "name": "f5",
+              "fill": "#FDE68A",
+              "content": "封壳",
+              "fontFamily": "Inter",
+              "fontSize": 28,
+              "fontWeight": "700"
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "yiRJz",
+          "x": 1340,
+          "y": 36,
+          "name": "Tape",
+          "rotation": -2,
+          "width": 390,
+          "height": 82,
+          "fill": "#FDE047",
+          "cornerRadius": 5,
+          "stroke": {
+            "thickness": 4,
+            "fill": "#111111"
+          },
+          "layout": "none",
+          "children": [
+            {
+              "type": "text",
+              "id": "3iI8s",
+              "x": 24,
+              "y": 20,
+              "name": "tapeText",
+              "fill": "#111111",
+              "content": "买到手先别封壳",
+              "fontFamily": "Inter",
+              "fontSize": 34,
+              "fontWeight": "700"
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "9P8AX",
+          "x": 88,
+          "y": 215,
+          "name": "BOM List",
+          "width": 800,
+          "height": 690,
+          "fill": "#151515",
+          "cornerRadius": 18,
+          "stroke": {
+            "thickness": 3,
+            "fill": "#00E5FF"
+          },
+          "layout": "vertical",
+          "gap": 14,
+          "padding": 24,
+          "children": [
+            {
+              "type": "text",
+              "id": "ZxTkJ",
+              "name": "bomTitle",
+              "fill": "#E8FBFF",
+              "content": "买料清单",
+              "fontFamily": "Inter",
+              "fontSize": 38,
+              "fontWeight": "700"
+            },
+            {
+              "type": "text",
+              "id": "yCaJj",
+              "name": "item1",
+              "fill": "#F5F0E8",
+              "textGrowth": "fixed-width",
+              "width": "fill_container",
+              "content": "1. ESP32-WROVER DevKit ×1：自带 Wi‑Fi + 蓝牙；优先带 PSRAM；不要 C3/S3。",
+              "lineHeight": 1.15,
+              "fontFamily": "Inter",
+              "fontSize": 25,
+              "fontWeight": "normal"
+            },
+            {
+              "type": "text",
+              "id": "dbghO",
+              "name": "item2",
+              "fill": "#BBF7D0",
+              "textGrowth": "fixed-width",
+              "width": "fill_container",
+              "content": "2. MAX98357A I2S 功放 ×2：确认有 L/R 或 SD/MODE 声道选择。",
+              "lineHeight": 1.15,
+              "fontFamily": "Inter",
+              "fontSize": 25,
+              "fontWeight": "normal"
+            },
+            {
+              "type": "text",
+              "id": "5RiQg",
+              "name": "item3",
+              "fill": "#DDD6FE",
+              "textGrowth": "fixed-width",
+              "width": "fill_container",
+              "content": "3. 4Ω 3W/5W 喇叭 ×2：拆机件也行，注意左右固定牢。",
+              "lineHeight": 1.15,
+              "fontFamily": "Inter",
+              "fontSize": 25,
+              "fontWeight": "normal"
+            },
+            {
+              "type": "text",
+              "id": "tjNDa",
+              "name": "item4",
+              "fill": "#67E8F9",
+              "textGrowth": "fixed-width",
+              "width": "fill_container",
+              "content": "4. SSD1306 OLED I2C ×1：128×64，4 针 VCC/GND/SDA/SCL。",
+              "lineHeight": 1.15,
+              "fontFamily": "Inter",
+              "fontSize": 25,
+              "fontWeight": "normal"
+            },
+            {
+              "type": "text",
+              "id": "K9Gpn",
+              "name": "item5",
+              "fill": "#FDBA74",
+              "textGrowth": "fixed-width",
+              "width": "fill_container",
+              "content": "5. EC11 旋转编码器 ×1：带按压开关，最好买带旋钮帽。",
+              "lineHeight": 1.15,
+              "fontFamily": "Inter",
+              "fontSize": 25,
+              "fontWeight": "normal"
+            },
+            {
+              "type": "text",
+              "id": "bPwiw",
+              "name": "item6",
+              "fill": "#FCA5A5",
+              "textGrowth": "fixed-width",
+              "width": "fill_container",
+              "content": "6. 5V 2A 供电：USB 充电头/充电宝/USB-C 小模块都可以。",
+              "lineHeight": 1.15,
+              "fontFamily": "Inter",
+              "fontSize": 25,
+              "fontWeight": "normal"
+            },
+            {
+              "type": "text",
+              "id": "V8vNo",
+              "name": "item7",
+              "fill": "#FDE68A",
+              "textGrowth": "fixed-width",
+              "width": "fill_container",
+              "content": "7. 470µF 电解电容 ×2 + 洞洞板/排针/杜邦线/热熔胶/扎带。",
+              "lineHeight": 1.15,
+              "fontFamily": "Inter",
+              "fontSize": 25,
+              "fontWeight": "normal"
+            },
+            {
+              "type": "text",
+              "id": "wzfo5",
+              "name": "item8",
+              "fill": "#D6D3D1",
+              "textGrowth": "fixed-width",
+              "width": "fill_container",
+              "content": "8. 外壳：旧路由器壳、铁盒、木板边角料；铁盒必须给天线留窗口。",
+              "lineHeight": 1.15,
+              "fontFamily": "Inter",
+              "fontSize": 25,
+              "fontWeight": "normal"
+            },
+            {
+              "type": "text",
+              "id": "vmcnG",
+              "name": "item9",
+              "fill": "#67E8F9",
+              "textGrowth": "fixed-width",
+              "width": "fill_container",
+              "content": "Wi‑Fi 不另买模块：ESP32 已内置。金属外壳会屏蔽信号，天线区域必须露出或开塑料窗。",
+              "lineHeight": 1.15,
+              "fontFamily": "Inter",
+              "fontSize": 24,
+              "fontWeight": "normal"
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "bv3qV",
+          "x": 970,
+          "y": 215,
+          "name": "Build Order",
+          "width": 860,
+          "height": 690,
+          "fill": "#18130F",
+          "cornerRadius": 18,
+          "stroke": {
+            "thickness": 3,
+            "fill": "#F97316"
+          },
+          "layout": "vertical",
+          "gap": 16,
+          "padding": 24,
+          "children": [
+            {
+              "type": "text",
+              "id": "7NMjD",
+              "name": "orderTitle",
+              "fill": "#FED7AA",
+              "content": "焊接 / 验收顺序",
+              "fontFamily": "Inter",
+              "fontSize": 38,
+              "fontWeight": "700"
+            },
+            {
+              "type": "text",
+              "id": "V43EU",
+              "name": "step1",
+              "fill": "#67E8F9",
+              "textGrowth": "fixed-width",
+              "width": "fill_container",
+              "content": "1. 只接 OLED：烧测试程序，看到开机字样再继续。",
+              "lineHeight": 1.15,
+              "fontFamily": "Inter",
+              "fontSize": 27,
+              "fontWeight": "normal"
+            },
+            {
+              "type": "text",
+              "id": "xGyhD",
+              "name": "step2",
+              "fill": "#FDBA74",
+              "textGrowth": "fixed-width",
+              "width": "fill_container",
+              "content": "2. 接旋钮：串口打印 A/B/SW，确认旋转方向和按压。",
+              "lineHeight": 1.15,
+              "fontFamily": "Inter",
+              "fontSize": 27,
+              "fontWeight": "normal"
+            },
+            {
+              "type": "text",
+              "id": "t3W3H",
+              "name": "step3",
+              "fill": "#BBF7D0",
+              "textGrowth": "fixed-width",
+              "width": "fill_container",
+              "content": "3. 接一块 MAX98357A + 一个喇叭：I2S 播放测试音。",
+              "lineHeight": 1.15,
+              "fontFamily": "Inter",
+              "fontSize": 27,
+              "fontWeight": "normal"
+            },
+            {
+              "type": "text",
+              "id": "zUmwQ",
+              "name": "step4",
+              "fill": "#DDD6FE",
+              "textGrowth": "fixed-width",
+              "width": "fill_container",
+              "content": "4. 接第二块功放：设置 L/R，测试左右声道，反了就换声道焊盘。",
+              "lineHeight": 1.15,
+              "fontFamily": "Inter",
+              "fontSize": 27,
+              "fontWeight": "normal"
+            },
+            {
+              "type": "text",
+              "id": "JpGcE",
+              "name": "step5",
+              "fill": "#FDE68A",
+              "textGrowth": "fixed-width",
+              "width": "fill_container",
+              "content": "5. 加 470µF 电容：靠近功放 VIN/GND，减少爆音和掉压。",
+              "lineHeight": 1.15,
+              "fontFamily": "Inter",
+              "fontSize": 27,
+              "fontWeight": "normal"
+            },
+            {
+              "type": "text",
+              "id": "YG3MB",
+              "name": "step6",
+              "fill": "#F5F0E8",
+              "textGrowth": "fixed-width",
+              "width": "fill_container",
+              "content": "6. 跑网络电台，再跑蓝牙 A2DP；两个单独稳定后再合并。",
+              "lineHeight": 1.15,
+              "fontFamily": "Inter",
+              "fontSize": 27,
+              "fontWeight": "normal"
+            },
+            {
+              "type": "text",
+              "id": "DdWpv",
+              "name": "step7",
+              "fill": "#D6D3D1",
+              "textGrowth": "fixed-width",
+              "width": "fill_container",
+              "content": "7. 最后进外壳：先螺丝/扎带定位，确认散热，再热熔胶补强。",
+              "lineHeight": 1.15,
+              "fontFamily": "Inter",
+              "fontSize": 27,
+              "fontWeight": "normal"
+            },
+            {
+              "type": "text",
+              "id": "uqHvB",
+              "name": "step8",
+              "fill": "#67E8F9",
+              "textGrowth": "fixed-width",
+              "width": "fill_container",
+              "content": "联网验收：先裸板测试 Wi‑Fi RSSI，再装外壳；铁盒里信号差就把天线露出。",
+              "lineHeight": 1.15,
+              "fontFamily": "Inter",
+              "fontSize": 25,
+              "fontWeight": "normal"
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "h2yEb",
+          "x": 88,
+          "y": 930,
+          "name": "Warnings",
+          "width": 1742,
+          "height": 95,
+          "fill": "#251316",
+          "cornerRadius": 16,
+          "stroke": {
+            "thickness": 3,
+            "fill": "#FB7185"
+          },
+          "gap": 24,
+          "padding": [
+            18,
+            26
+          ],
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "text",
+              "id": "eeRF8",
+              "name": "warn1",
+              "fill": "#FDA4AF",
+              "content": "避坑",
+              "fontFamily": "Inter",
+              "fontSize": 32,
+              "fontWeight": "700"
+            },
+            {
+              "type": "text",
+              "id": "Bapiz",
+              "name": "warn2",
+              "fill": "#FDE68A",
+              "content": "喇叭线不要共地",
+              "fontFamily": "Inter",
+              "fontSize": 26,
+              "fontWeight": "normal"
+            },
+            {
+              "type": "text",
+              "id": "YsP4k",
+              "name": "warn3",
+              "fill": "#F5F0E8",
+              "content": "功放先小音量测试",
+              "fontFamily": "Inter",
+              "fontSize": 26,
+              "fontWeight": "normal"
+            },
+            {
+              "type": "text",
+              "id": "0qS34",
+              "name": "warn4",
+              "fill": "#BBF7D0",
+              "content": "Wi‑Fi 和蓝牙模式先分开跑通",
+              "fontFamily": "Inter",
+              "fontSize": 26,
+              "fontWeight": "normal"
+            },
+            {
+              "type": "text",
+              "id": "bhaXG",
+              "name": "warn5",
+              "fill": "#67E8F9",
+              "content": "外壳开孔前先纸板打样",
+              "fontFamily": "Inter",
+              "fontSize": 26,
+              "fontWeight": "normal"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

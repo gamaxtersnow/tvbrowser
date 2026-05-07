@@ -1,0 +1,166 @@
+{
+  "version": 1,
+  "author": "Codex",
+  "editor": "wokwi",
+  "parts": [
+    {
+      "type": "wokwi-esp32-devkit-v1",
+      "id": "esp",
+      "top": 28.8,
+      "left": 33.6,
+      "attrs": {}
+    },
+    {
+      "type": "board-ssd1306",
+      "id": "oled",
+      "top": 42.5,
+      "left": 341.0,
+      "attrs": {
+        "i2cAddress": "0x3c"
+      }
+    },
+    {
+      "type": "wokwi-ky-040",
+      "id": "encoder",
+      "top": 248.4,
+      "left": 331.2,
+      "attrs": {}
+    },
+    {
+      "type": "wokwi-pushbutton",
+      "id": "btnPrev",
+      "top": 242.2,
+      "left": 535.7,
+      "attrs": {
+        "color": "black",
+        "label": "PREV",
+        "key": "P",
+        "xray": "1"
+      }
+    },
+    {
+      "type": "wokwi-pushbutton",
+      "id": "btnNext",
+      "top": 242.2,
+      "left": 633.3,
+      "attrs": {
+        "color": "green",
+        "label": "NEXT",
+        "key": "N",
+        "xray": "1"
+      }
+    },
+    {
+      "type": "wokwi-pushbutton",
+      "id": "btnPlay",
+      "top": 337.8,
+      "left": 535.7,
+      "attrs": {
+        "color": "blue",
+        "label": "PLAY",
+        "key": " ",
+        "xray": "1"
+      }
+    },
+    {
+      "type": "wokwi-pushbutton",
+      "id": "btnMode",
+      "top": 337.8,
+      "left": 633.3,
+      "attrs": {
+        "color": "red",
+        "label": "MODE",
+        "key": "M",
+        "xray": "1"
+      }
+    },
+    {
+      "type": "wokwi-led",
+      "id": "ledNet",
+      "top": 56.4,
+      "left": 544.6,
+      "attrs": {
+        "color": "limegreen",
+        "label": "NET"
+      }
+    },
+    {
+      "type": "wokwi-led",
+      "id": "ledBt",
+      "top": 56.4,
+      "left": 617.4,
+      "attrs": {
+        "color": "dodgerblue",
+        "label": "BT"
+      }
+    },
+    {
+      "type": "wokwi-led",
+      "id": "ledPlay",
+      "top": 56.4,
+      "left": 690.2,
+      "attrs": {
+        "color": "orange",
+        "label": "PLAY"
+      }
+    },
+    {
+      "type": "wokwi-text",
+      "id": "labelKeys",
+      "top": 192.0,
+      "left": 532.0,
+      "attrs": {
+        "text": "KEYS: N NEXT | P PREV"
+      }
+    },
+    {
+      "type": "wokwi-text",
+      "id": "labelKeys2",
+      "top": 214.0,
+      "left": 532.0,
+      "attrs": {
+        "text": "SPACE PLAY | M MODE"
+      }
+    },
+    {
+      "type": "wokwi-text",
+      "id": "labelOled",
+      "top": 18.0,
+      "left": 340.0,
+      "attrs": {
+        "text": "OLED should show PUNK RADIO"
+      }
+    }
+  ],
+  "connections": [
+    ["esp:TX0", "$serialMonitor:RX", "", []],
+    ["esp:RX0", "$serialMonitor:TX", "", []],
+    ["esp:3V3", "oled:VCC", "red", ["h44", "v-18"]],
+    ["esp:GND.1", "oled:GND", "black", ["h32", "v-4"]],
+    ["esp:D21", "oled:SDA", "green", ["h56", "v24"]],
+    ["esp:D22", "oled:SCL", "blue", ["h68", "v36"]],
+    ["esp:3V3", "encoder:VCC", "red", ["v260", "h240"]],
+    ["esp:GND.2", "encoder:GND", "black", ["v272", "h250"]],
+    ["esp:D32", "encoder:CLK", "yellow", ["v170", "h210"]],
+    ["esp:D33", "encoder:DT", "orange", ["v182", "h220"]],
+    ["esp:D13", "encoder:SW", "purple", ["v194", "h230"]],
+    ["esp:GND.1", "btnPrev:1.l", "black", ["h475", "v205"]],
+    ["esp:D25", "btnPrev:2.r", "gray", ["h430", "v215"]],
+    ["esp:GND.1", "btnNext:1.l", "black", ["h570", "v205"]],
+    ["esp:D26", "btnNext:2.r", "green", ["h505", "v225"]],
+    ["esp:GND.1", "btnPlay:1.l", "black", ["h475", "v300"]],
+    ["esp:D27", "btnPlay:2.r", "blue", ["h430", "v310"]],
+    ["esp:GND.1", "btnMode:1.l", "black", ["h570", "v300"]],
+    ["esp:D14", "btnMode:2.r", "red", ["h505", "v320"]],
+    ["esp:D18", "ledNet:A", "green", ["h450", "v65"]],
+    ["esp:GND.1", "ledNet:C", "black", ["h455", "v85"]],
+    ["esp:D19", "ledBt:A", "blue", ["h520", "v75"]],
+    ["esp:GND.1", "ledBt:C", "black", ["h525", "v95"]],
+    ["esp:D23", "ledPlay:A", "orange", ["h590", "v85"]],
+    ["esp:GND.1", "ledPlay:C", "black", ["h595", "v105"]]
+  ],
+  "serialMonitor": {
+    "display": "always",
+    "newline": "lf"
+  }
+}

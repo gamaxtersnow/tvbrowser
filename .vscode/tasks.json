@@ -1,0 +1,19 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Build Wokwi simulation",
+      "type": "shell",
+      "command": "/tmp/xxqg-pio-venv/bin/pio run -e esp32-wokwi-sim",
+      "group": "build",
+      "problemMatcher": []
+    },
+    {
+      "label": "Build ESP32 WROVER firmware",
+      "type": "shell",
+      "command": "/tmp/xxqg-pio-venv/bin/pio run -e esp32-wrover-radio",
+      "group": "build",
+      "problemMatcher": []
+    }
+  ]
+}

@@ -1,0 +1,5 @@
+[wokwi]
+version = 1
+firmware = ".pio/build/esp32-wokwi-sim/firmware-merged.bin"
+elf = ".pio/build/esp32-wokwi-sim/firmware.elf"
+rfc2217ServerPort = 4000
